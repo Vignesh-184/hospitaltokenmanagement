@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sunrise Hospital - Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { min-height: 100vh; background: #f1f5f9; display: flex; align-items: center; justify-content: center; }
+    .login-container, .dashboard-container { width: 100%; max-width: 500px; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #1e3a8a; margin-bottom: 1rem; }
+    label { font-weight: 600; margin-top: 1rem; display: block; color: #1e293b; }
+    input, button, select { width: 100%; padding: 10px; margin-top: 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+    button { background: #2563eb; color: white; font-weight: 600; cursor: pointer; transition: background 0.3s; margin-top: 1.5rem; }
+    button:hover { background: #1d4ed8; }
+    .demo-credentials { background: #e0f2fe; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; color: #0369a1; }
+    aside { width: 250px; background: #1e3a8a; color: white; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 1.5rem; height: 100vh; }
+    aside h2 { font-size: 1.5rem; text-align: center; margin-bottom: 2rem; }
+    aside a { color: white; text-decoration: none; font-weight: 600; padding: 0.8rem 1rem; border-radius: 8px; transition: background 0.3s; }
+    aside a:hover { background: #2563eb; }
+    main { flex: 1; padding: 2rem; }
+    header { background: white; padding: 1rem 2rem; margin-bottom: 2rem; border-radius: 10px; box-shadow: 0 1px 5px rgba(0,0,0,0.1); }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .card { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h3 { margin-bottom: 1rem; color: #1e3a8a; }
+    .doctor-item, .patient-item { display: flex; align-items: center; background: #f8fafc; padding: 0.8rem; margin-bottom: 8px; border-radius: 6px; gap: 1rem; }
+    .doctor-item img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+    .doctor-info { flex-grow: 1; }
+    .doctor-name { font-weight: 600; color: #1e3a8a; }
+    .doctor-dept { font-size: 0.9rem; color: gray; }
+    .doctor-details { font-size: 0.8rem; color: #64748b; margin-top: 4px; }
+    .btn-danger { background: #dc2626; border: none; padding: 8px 12px; border-radius: 6px; color: white; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+    .btn-danger:hover { background: #b91c1c; }
+    #qr-reader { width: 100%; margin-top: 1rem; }
+    table { width: 100%; margin-top: 1rem; border-collapse: collapse; }
+    th, td { padding: 10px; border: 1px solid #e2e8f0; text-align: left; }
+    th { background: #f1f5f9; }
+    .dashboard { display: flex; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { 
+      .dashboard-grid { grid-template-columns: 1fr; }
+      aside { display: none; }
+      .dashboard { flex-direction: column; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* Linked list style */
+    .node {
+      padding: 10px 15px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #1e293b;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .node::after {
+      content: "→";
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+    .node:last-child::after {
+      display: none;
+    }
+    .node.highlight {
+      background: #2563eb;
+      color: white;
+    }
+    #linkedList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Container -->
+<div class="login-container" id="loginContainer">
+  <h2>Admin Login</h2>
+  <div class="demo-credentials">
+    <strong>Demo Credentials:</strong><br>
+    Email: admin@sunrisehospital.com<br>
+    Password: admin123
+  </div>
+  <form onsubmit="login(event)">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter email" required>
+    
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter password" required>
+    
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<!-- Dashboard Container -->
+<div class="dashboard" id="dashboard" style="display: none;">
+  <aside>
+    <h2>Admin Panel</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Doctors</a>
+    <a href="#">Patient Tokens</a>
+    <a href="#">Settings</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </aside>
+
+  <main>
+    <header>
+      <h1>Welcome, Admin 👨‍⚕️</h1>
+      <p>Manage doctors and monitor patient token status</p>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Doctor Management -->
+      <div class="card">
+        <h3>Manage Doctors</h3>
+        <input type="text" id="doctorName" placeholder="Doctor's Full Name">
+        <div class="form-row">
+          <div>
+            <label for="doctorDept">Department</label>
+            <select id="doctorDept">
+              <option value="">Select Department</option>
+              <option>Cardiology</option>
+              <option>Dermatology</option>
+              <option>Orthopedics</option>
+              <option>Neurology</option>
+              <option>Pediatrics</option>
+              <option>Psychiatry</option>
+              <option>Oncology</option>
+            </select>
+          </div>
+          <div>
+            <label for="doctorExperience">Experience (years)</label>
+            <input type="number" id="doctorExperience" placeholder="Years of experience">
+          </div>
+        </div>
+        <input type="text" id="doctorSpeciality" placeholder="Speciality">
+        <input type="tel" id="doctorPhone" placeholder="Phone Number">
+        <input type="email" id="doctorEmail" placeholder="Email Address">
+        <button onclick="addDoctor()">Add Doctor</button>
+        <div id="doctorList"></div>
+      </div>
+
+      <!-- QR Scanner -->
+      <div class="card">
+        <h3>Scan Patient QR Codes</h3>
+        <div id="qr-reader"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Token ID</th>
+              <th>Scanned Time</th>
+            </tr>
+          </thead>
+          <tbody id="patientList"></tbody>
+        </table>
+
+        <!-- Linked List Display -->
+        <div id="linkedList"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  function login(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (email === 'admin@sunrisehospital.com' && password === 'admin123') {
+      document.getElementById('loginContainer').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'flex';
+    } else {
+      alert('Invalid credentials.');
+    }
+  }
+
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) location.reload();
+  }
+
+  // Doctor Management
+  let doctors = JSON.parse(localStorage.getItem('doctors')) || [];
+  const randomAvatars = [
+    "https://randomuser.me/api/portraits/men/32.jpg",
+    "https://randomuser.me/api/portraits/women/65.jpg",
+    "https://randomuser.me/api/portraits/men/75.jpg",
+    "https://randomuser.me/api/portraits/women/34.jpg"
+  ];
+
+  function addDoctor() {
+    const name = document.getElementById('doctorName').value.trim();
+    const dept = document.getElementById('doctorDept').value;
+    const speciality = document.getElementById('doctorSpeciality').value.trim();
+    const experience = document.getElementById('doctorExperience').value.trim();
+    const phone = document.getElementById('doctorPhone').value.trim();
+    const email = document.getElementById('doctorEmail').value.trim();
+
+    if (name && dept && speciality && experience && phone && email) {
+      const profilePic = randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
+      doctors.push({ name, dept, speciality, experience, phone, email, profilePic });
+      localStorage.setItem('doctors', JSON.stringify(doctors));
+      renderDoctors();
+      document.getElementById('doctorName').value = '';
+      document.getElementById('doctorDept').value = '';
+      document.getElementById('doctorSpeciality').value = '';
+      document.getElementById('doctorExperience').value = '';
+      document.getElementById('doctorPhone').value = '';
+      document.getElementById('doctorEmail').value = '';
+    } else {
+      alert('Please fill all fields!');
+    }
+  }
+
+  function deleteDoctor(index) {
+    if (confirm('Delete this doctor?')) {
+      doctors.splice(index, 1);
+      localStorage.setItem('doctors', JSON.stringify(doctors));
+      renderDoctors();
+    }
+  }
+
+  function renderDoctors() {
+    const list = document.getElementById('doctorList');
+    list.innerHTML = '';
+    doctors.forEach((doc, idx) => {
+      list.innerHTML += `
+        <div class="doctor-item">
+          <img src="${doc.profilePic}" />
+          <div class="doctor-info">
+            <div class="doctor-name">${doc.name}</div>
+            <div class="doctor-dept">${doc.dept}</div>
+            <div class="doctor-details">
+              <div>Speciality: ${doc.speciality}</div>
+              <div>Experience: ${doc.experience} years</div>
+              <div>Phone: ${doc.phone}</div>
+              <div>Email: ${doc.email}</div>
+            </div>
+          </div>
+          <button class="btn-danger" onclick="deleteDoctor(${idx})">Delete</button>
+        </div>
+      `;
+    });
+  }
+
+  renderDoctors();
+
+  // Linked list display
+  function generateLinkedList() {
+    const linkedList = document.getElementById("linkedList");
+    linkedList.innerHTML = '';
+    for (let i = 1; i <= 20; i++) {
+      
+      const node = document.createElement('div');
+      node.className = 'node';
+      node.textContent = i;
+      node.setAttribute('data-value', i);
+      linkedList.appendChild(node);
+    }
+  }
+
+  function highlightNode(tokenNumber) {
+    document.querySelectorAll('.node').forEach(node => {
+      if (parseInt(node.getAttribute('data-value')) === parseInt(tokenNumber)) {
+        node.classList.add('highlight');
+      }
+    });
+  }
+
+  generateLinkedList();
+
+  // QR code scanning
+  function onScanSuccess(decodedText, decodedResult) {
+    const now = new Date().toLocaleTimeString();
+    const table = document.getElementById('patientList');
+    const newRow = `<tr><td>${decodedText}</td><td>${now}</td></tr>`;
+    table.innerHTML += newRow;
+
+    if (!isNaN(decodedText) && decodedText >= 1 && decodedText <= 100) {
+      highlightNode(decodedText);
+    }
+  }
+
+  var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess);
+</script>
+
+</body>
+</html>

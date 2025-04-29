@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sunrise Multispeciality Hospital</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, rgba(20,184,166,0.1) 0%, rgba(79,70,229,0.1) 100%);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .doctor-card {
+      transition: all 0.3s ease;
+      background: linear-gradient(to bottom right, #f8fafc, #f0fdfa);
+    }
+    .doctor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(79,70,229,0.1);
+    }
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-teal-500 to-indigo-600 shadow-lg fixed w-full z-50">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <div class="flex items-center space-x-3">
+        <img src="OIP (2).jpeg" alt="Hospital Logo" class="w-10 h-10 rounded-full border-2 border-white shadow-md">
+        <span class="text-2xl font-bold text-gray-500">Sunrise Hospital</span>
+      </div>
+     
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="#home" class="text-white hover:text-grey-500 font-semibold transition duration-300">Home</a>
+        <a href="doctors.html" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Doctors</a>
+        <a href="blood.html" class="text-white hover:text-grey-500 font-semibold transition duration-300">Blood</a>
+        <a href="#about" class="text-white hover:text-yellow-300 font-semibold transition duration-300">About</a>
+        <a href="#services" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Services</a>
+        <a href="#appointment" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Appointment</a>
+        <a href="#contact" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Contact</a>
+
+      </div>
+      
+      <div class="hidden md:flex space-x-4">
+        <a href="/admin-login.html" class="bg-white text-teal-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg">
+          <i class="fas fa-user-shield mr-2"></i>Admin Login
+        </a>
+        <a href="#appointment" class="bg-yellow-400 text-gray-800 px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300 shadow-md hover:shadow-lg pulse">
+          <i class="fas fa-calendar-check mr-2"></i>Book Appointment
+        </a>
+      </div>
+
+      <!-- Hamburger menu -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-white focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="menu" class="hidden md:hidden bg-gradient-to-r from-teal-600 to-indigo-700">
+        <div class="flex flex-col items-center py-4 space-y-4">
+          <a href="#home" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Home</a>
+          <a href="doctors.html" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Doctors</a>
+          <a href="#about" class="text-white hover:text-yellow-300 font-semibold transition duration-300">About</a>
+          <a href="#services" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Services</a>
+          <a href="#appointment" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Appointment</a>
+          <a href="#contact" class="text-white hover:text-yellow-300 font-semibold transition duration-300">Contact</a>
+          <div class="flex space-x-4 pt-2">
+            <a href="/admin-login.html" class="bg-white text-teal-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-300">
+              <i class="fas fa-user-shield mr-2"></i>Admin
+            </a>
+            <a href="#appointment" class="bg-yellow-400 text-gray-800 px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300">
+              <i class="fas fa-calendar-check mr-2"></i>Book
+            </a>
+          </div>
+        </div>
+      </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-24 pb-16 hero-gradient">
+    <div class="container mx-auto px-4">
+      <div class="text-center p-10 animate__animated animate__fadeIn">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-indigo-700 leading-tight">
+          <span class="bg-clip-text text-black bg-gradient-to-r from-teal-500 to-indigo-600">
+            Welcome to Sunrise Multispeciality Hospital
+          </span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          Where advanced medical care meets compassionate healing for you and your family.
+        </p>
+        <div class="mt-8">
+          <a href="#appointment" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full hover:bg-indigo-700 transition duration-300 shadow-lg hover:shadow-xl">
+            <i class="fas fa-heartbeat mr-2"></i>Get Care Today
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-12 animate__animated animate__fadeInUp">
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <div class="text-3xl font-bold text-indigo-600">150+</div>
+          <div class="text-gray-600">Expert Doctors</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <div class="text-3xl font-bold text-teal-500">25+</div>
+          <div class="text-gray-600">Specialities</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <div class="text-3xl font-bold text-indigo-600">10K+</div>
+          <div class="text-gray-600">Patients Yearly</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <div class="text-3xl font-bold text-teal-500">24/7</div>
+          <div class="text-gray-600">Emergency Care</div>
+        </div>
+      </div>
+
+      <!-- Carousel -->
+      <div class="container mx-auto px-4 mt-16">
+        <div class="swiper mySwiper rounded-xl overflow-hidden shadow-2xl">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="OIP (1).jpeg" alt="Hospital Image 1" class="w-full h-96 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                <div class="text-white">
+                  <h3 class="text-2xl font-bold">World-Class Facilities</h3>
+                  <p>State-of-the-art medical equipment for accurate diagnosis</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="OIP.jpeg" alt="Hospital Image 2" class="w-full h-96 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                <div class="text-white">
+                  <h3 class="text-2xl font-bold">Compassionate Care</h3>
+                  <p>Our team treats every patient like family</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="D145_296_065_1200.jpg" alt="Hospital Image 3" class="w-full h-96 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                <div class="text-white">
+                  <h3 class="text-2xl font-bold">Advanced Technology</h3>
+                  <p>Cutting-edge treatments for better outcomes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8 animate__animated animate__fadeInLeft">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+               alt="Hospital Building" 
+               class="rounded-xl shadow-2xl floating">
+        </div>
+        <div class="md:w-1/2 animate__animated animate__fadeInRight">
+          <h2 class="text-3xl font-bold mb-6 text-indigo-600 relative inline-block">
+            <span class="relative z-10">About Our Hospital</span>
+            <span class="absolute bottom-0 left-0 w-full h-2 bg-teal-300/50 z-0" style="bottom: 5px;"></span>
+          </h2>
+          <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+            Established in 1990, Sunrise Multispeciality Hospital has grown to become a trusted name in healthcare, serving our community with dedication and excellence. Our 200-bed facility houses the latest medical technology and a team of highly skilled professionals.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="bg-teal-100 p-2 rounded-full mr-4">
+                <i class="fas fa-check-circle text-teal-600"></i>
+              </div>
+              <p class="text-gray-600 flex-1">NABH Accredited facility ensuring highest standards of care</p>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-teal-100 p-2 rounded-full mr-4">
+                <i class="fas fa-check-circle text-teal-600"></i>
+              </div>
+              <p class="text-gray-600 flex-1">Round-the-clock emergency and critical care services</p>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-teal-100 p-2 rounded-full mr-4">
+                <i class="fas fa-check-circle text-teal-600"></i>
+              </div>
+              <p class="text-gray-600 flex-1">Patient-centric approach with personalized treatment plans</p>
+            </div>
+          </div>
+          <a href="#services" class="inline-block mt-6 bg-indigo-100 text-indigo-700 px-6 py-2 rounded-full hover:bg-indigo-200 transition duration-300">
+            Explore Our Services <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4 text-indigo-600">Our Specialized Services</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive healthcare services across multiple specialties to meet all your medical needs</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Cardiology -->
+        <div class="service-card p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300">
+          <div class="text-teal-500 mb-4">
+            <i class="fas fa-heartbeat text-4xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Cardiology</h3>
+          <p class="text-gray-600 mb-4">Advanced cardiac care with cutting-edge technology and expert cardiologists.</p>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-teal-500 mr-2"></i> Angioplasty & Stenting
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-teal-500 mr-2"></i> Pacemaker Implantation
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-teal-500 mr-2"></i> Cardiac Rehabilitation
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Neurology -->
+        <div class="service-card p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300">
+          <div class="text-indigo-500 mb-4">
+            <i class="fas fa-brain text-4xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Neurology</h3>
+          <p class="text-gray-600 mb-4">Comprehensive brain and nervous system treatments with precision.</p>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-indigo-500 mr-2"></i> Stroke Management
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-indigo-500 mr-2"></i> Epilepsy Treatment
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-indigo-500 mr-2"></i> Neurological Rehabilitation
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Orthopedics -->
+        <div class="service-card p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300">
+          <div class="text-amber-500 mb-4">
+            <i class="fas fa-bone text-4xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Orthopedics</h3>
+          <p class="text-gray-600 mb-4">Expert care for bones, joints, and musculoskeletal system.</p>
+          <ul class="text-gray-600 space-y-2">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-amber-500 mr-2"></i> Joint Replacement
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-amber-500 mr-2"></i> Sports Injury Treatment
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-amber-500 mr-2"></i> Spinal Surgery
+            </li>
+          </ul>
+        </div>
+        
+        <!-- More services would continue here -->
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="#" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+          View All Services <i class="fas fa-chevron-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4 text-indigo-600">Meet Our Expert Doctors</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Our team of highly qualified specialists is dedicated to your health and well-being</p>
+      </div>
+      
+      <div id="doctorsList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Doctor cards will be inserted here by JavaScript -->
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="doctors.html" class="inline-flex items-center bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition duration-300 shadow-md hover:shadow-lg">
+          View All Doctors <i class="fas fa-user-md ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4 text-indigo-600">Patient Experiences</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Hear what our patients say about their experience at Sunrise Hospital</p>
+      </div>
+      
+      <div class="swiper testimonialSwiper max-w-4xl mx-auto">
+        <div class="swiper-wrapper pb-12">
+          <!-- Testimonial 1 -->
+          <div class="swiper-slide">
+            <div class="bg-white p-8 rounded-xl shadow-md relative">
+              <div class="absolute -top-0 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                <i class="fas fa-quote-left text-white"></i>
+              </div>
+              <p class="text-gray-600 italic mb-6 mt-6">"The care I received at Sunrise Hospital was exceptional. The doctors took time to explain everything and the nursing staff was incredibly attentive. My recovery was faster than expected."</p>
+              <div class="flex items-center">
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Patient" class="w-12 h-12 rounded-full mr-4">
+                <div>
+                  <h4 class="font-semibold text-gray-800">Priya Sharma</h4>
+                  <p class="text-gray-500 text-sm">Cardiac Patient</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonial 2 -->
+          <div class="swiper-slide">
+            <div class="bg-white p-8 rounded-xl shadow-md relative">
+              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center">
+                <i class="fas fa-quote-left text-white"></i>
+              </div>
+              <p class="text-gray-600 italic mb-6 mt-4">"After my knee replacement surgery, the rehabilitation team at Sunrise helped me regain mobility faster than I imagined. The facilities are world-class and the staff is very professional."</p>
+              <div class="flex items-center">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Patient" class="w-12 h-12 rounded-full mr-4">
+                <div>
+                  <h4 class="font-semibold text-gray-800">Rajiv Malhotra</h4>
+                  <p class="text-gray-500 text-sm">Orthopedic Patient</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonial 3 -->
+          <div class="swiper-slide">
+            <div class="bg-white p-8 rounded-xl shadow-md relative">
+              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                <i class="fas fa-quote-left text-white"></i>
+              </div>
+              <p class="text-gray-600 italic mb-6 mt-4">"When my father had a stroke, the neurology team at Sunrise acted swiftly. Their expertise and quick response saved his life. We're forever grateful for their care and compassion."</p>
+              <div class="flex items-center">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Patient" class="w-12 h-12 rounded-full mr-4">
+                <div>
+                  <h4 class="font-semibold text-gray-800">Ananya Gupta</h4>
+                  <p class="text-gray-500 text-sm">Family Member</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appointment Section -->
+  <section id="appointment" class="py-20 bg-gradient-to-r from-indigo-600 to-teal-500 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Ready to Book Your Appointment?</h2>
+        <p class="text-indigo-100 mb-8 text-lg">Schedule your visit with our specialists today. Quality healthcare is just a click away.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/book-appointment.html" class="bg-white text-indigo-600 px-8 py-4 rounded-full hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl font-semibold">
+            <i class="fas fa-calendar-alt mr-2"></i>Book Online Now
+          </a>
+          <a href="tel:+919876543210" class="bg-indigo-800 text-white px-8 py-4 rounded-full hover:bg-indigo-900 transition duration-300 shadow-lg hover:shadow-xl font-semibold">
+            <i class="fas fa-phone-alt mr-2"></i>Call: +91 9876543210
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-bold mb-6 text-indigo-600">Contact Information</h2>
+          <p class="text-gray-600 mb-8">We're here to answer your questions and provide the care you need. Reach out to us through any of these channels.</p>
+          
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                <i class="fas fa-map-marker-alt text-indigo-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Address</h4>
+                <p class="text-gray-600">Sunrise Multispeciality Hospital, City Center, New Delhi - 110001</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-teal-100 p-3 rounded-full mr-4">
+                <i class="fas fa-phone-alt text-teal-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Phone</h4>
+                <p class="text-gray-600">+91 9876543210 (24/7 Emergency)</p>
+                <p class="text-gray-600">+91 1122334455 (Appointments)</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                <i class="fas fa-envelope text-indigo-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Email</h4>
+                <p class="text-gray-600">info@sunrisehospital.com</p>
+                <p class="text-gray-600">appointments@sunrisehospital.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-teal-100 p-3 rounded-full mr-4">
+                <i class="fas fa-clock text-teal-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Working Hours</h4>
+                <p class="text-gray-600">OPD: Mon-Sat, 9:00 AM - 8:00 PM</p>
+                <p class="text-gray-600">Emergency: 24/7</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8">
+            <h4 class="font-semibold text-gray-800 mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="bg-indigo-100 text-indigo-600 p-3 rounded-full hover:bg-indigo-200 transition duration-300">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="bg-blue-100 text-blue-500 p-3 rounded-full hover:bg-blue-200 transition duration-300">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="bg-pink-100 text-pink-500 p-3 rounded-full hover:bg-pink-200 transition duration-300">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="bg-blue-100 text-blue-700 p-3 rounded-full hover:bg-blue-200 transition duration-300">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:w-1/2">
+          <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+            <h3 class="text-2xl font-bold mb-6 text-indigo-600">Send Us a Message</h3>
+            <form class="space-y-4">
+              <div>
+                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              </div>
+              <div>
+                <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              </div>
+              <div>
+                <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              </div>
+              <div>
+                <label for="message" class="block text-gray-700 mb-2">Your Message</label>
+                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+              </div>
+              <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-300 font-semibold">
+                Send Message <i class="fas fa-paper-plane ml-2"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <div class="h-96 w-full">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.415229056126!2d77.2098643150825!3d28.62873998242383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5a8a0a0a01%3A0x8a0a0a0a0a0a0a0!2sNew%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy"
+      class="filter grayscale-20 hover:grayscale-0 transition duration-500">
+    </iframe>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-indigo-800 to-teal-700 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <img src="OIP (2).jpeg" alt="Hospital Logo" class="w-10 h-10 rounded-full border-2 border-white">
+            <span class="text-xl font-bold">Sunrise Hospital</span>
+          </div>
+          <p class="text-indigo-100">Providing quality healthcare with compassion and excellence since 1990.</p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-indigo-100 hover:text-white transition duration-300">Home</a></li>
+            <li><a href="#about" class="text-indigo-100 hover:text-white transition duration-300">About Us</a></li>
+            <li><a href="#services" class="text-indigo-100 hover:text-white transition duration-300">Services</a></li>
+            <li><a href="#appointment" class="text-indigo-100 hover:text-white transition duration-300">Appointments</a></li>
+            <li><a href="#contact" class="text-indigo-100 hover:text-white transition duration-300">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-indigo-100 hover:text-white transition duration-300">Cardiology</a></li>
+            <li><a href="#" class="text-indigo-100 hover:text-white transition duration-300">Neurology</a></li>
+            <li><a href="#" class="text-indigo-100 hover:text-white transition duration-300">Orthopedics</a></li>
+            <li><a href="#" class="text-indigo-100 hover:text-white transition duration-300">Pediatrics</a></li>
+            <li><a href="#" class="text-indigo-100 hover:text-white transition duration-300">Emergency Care</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+          <p class="text-indigo-100 mb-4">Subscribe to our newsletter for health tips and updates.</p>
+          <form class="flex">
+            <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+            <button type="submit" class="bg-indigo-600 px-4 py-2 rounded-r-lg hover:bg-indigo-700 transition duration-300">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-indigo-500 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-indigo-200">&copy; 2025 Sunrise Multispeciality Hospital. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-indigo-200 hover:text-white transition duration-300">Privacy Policy</a>
+          <a href="#" class="text-indigo-200 hover:text-white transition duration-300">Terms of Service</a>
+          <a href="#" class="text-indigo-200 hover:text-white transition duration-300">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+ 
